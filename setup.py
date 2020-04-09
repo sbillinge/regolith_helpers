@@ -5,7 +5,7 @@ with open("README.rst", "r") as fh:
 
 
 setuptools.setup(
-    name="regolith-helpers", # Replace with your own name
+    name="regolith-helpers",   # Replace with your own name
     version="0.0.1",
     author="example author",
     author_email="sb2896@columbia.edu",
