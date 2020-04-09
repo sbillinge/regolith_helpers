@@ -1,4 +1,5 @@
-Billinge group python packaging template
+Helper functions for adding things to regolith databases and making reports
 ---------
 
-Please create your repo based on this template following the instructions at [creating-a-repo-from-template](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template)
+Proper builders should be added directly to regolith,
+but quicker hacky things can go here
