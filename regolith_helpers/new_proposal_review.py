@@ -40,10 +40,8 @@ def parser(argv=None):
     return args
 
 
-def main(argvs=None):
+def main(args):
     file = Path.cwd().joinpath('..', 'db', "{}.yml".format(OUTCOLLECTION))
-
-    args = parser(argvs)
     name = nameparser.HumanName(args.name)
     day = dt.datetime.today().day
     month = dt.datetime.today().month
