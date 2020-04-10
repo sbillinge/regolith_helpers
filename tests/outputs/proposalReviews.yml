@@ -14,6 +14,7 @@
     - they will find the cause of Malaria
     - when they find it they will determine a cure
   does_what: Find a cure for Malaria
+  due_date: '2020-04-10'
   freewrite:
     - I can put extra things here, such as special instructions from the
     - program officer
@@ -31,7 +32,7 @@
   nsf_broader_impacts: []
   nsf_create_original_transformative: []
   nsf_plan_good: []
-  nsf_pot_to_Advance_knowledge: []
+  nsf_pot_to_advance_knowledge: []
   nsf_pot_to_benefit_society: []
   requester: Lane Wilson
   reviewer: sbillinge
@@ -52,6 +53,7 @@
     - they will find the cause of Poverty
     - when they find it they will determine a cure
   does_what: Find a cure for Poverty
+  due_date: '2020-04-10'
   freewrite:
     - I can put extra things here, such as special instructions from the
     - program officer
@@ -72,7 +74,7 @@
   nsf_plan_good:
     - I don't see any issues with the plan
     - it should be very straightforward
-  nsf_pot_to_Advance_knowledge:
+  nsf_pot_to_advance_knowledge:
     - This won't advance knowledge at all
   nsf_pot_to_benefit_society:
     - Society will benefit by poor people being made unpoor if they want to be
@@ -87,7 +89,6 @@
     - The resources available to the PI seem adequate
   agency: nsf
   competency_of_team: []
-  day: 9
   doe_appropriateness_of_approach: []
   doe_reasonableness_of_budget: []
   doe_relevance_to_program_mission: []
@@ -97,13 +98,13 @@
   freewrite: []
   goals: []
   importance: []
-  institutions: ''
+  institutions: []
   month: tbd
   names: A. Einstein
   nsf_broader_impacts: []
   nsf_create_original_transformative: []
   nsf_plan_good: []
-  nsf_pot_to_Advance_knowledge: []
+  nsf_pot_to_advance_knowledge: []
   nsf_pot_to_benefit_society: []
   requester: Tess Guebre
   reviewer: sbillinge

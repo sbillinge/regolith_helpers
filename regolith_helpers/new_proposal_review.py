@@ -1,16 +1,8 @@
 import datetime as dt
-import os
-import sys
-
 import yaml
-import argparse
-from pathlib import Path, PurePath
-import uuid
+from pathlib import Path
 import nameparser
 
-import pytest
-
-from regolith.dates import month_to_str_int
 from regolith.fsclient import dump_yaml
 from regolith.dates import month_to_str_int
 
@@ -19,25 +11,24 @@ ALLOWED_STATI = ["invited", "accepted", "declined", "downloaded", "inprogress",
                  "submitted"]
 
 
-def parser(argv=None):
-    parser = argparse.ArgumentParser()
-    parser.add_argument("name", help="pi first name space last name in quotes",
+def subparser(subp):
+    subpi = subp.add_parser("a_proprev", help="adds a new empty proposal review")
+    subpi.add_argument("name", help="pi first name space last name in quotes",
                         default=None)
-    parser.add_argument("type", help="nsf or doe", default=None)
-    parser.add_argument("due_date", help="due date in form YYYY-MM-DD",
+    subpi.add_argument("type", help="nsf or doe", default=None)
+    subpi.add_argument("due_date", help="due date in form YYYY-MM-DD",
                         default=None)
-    parser.add_argument("-q", "--requester",
+    subpi.add_argument("-q", "--requester",
                         help="Name of the Program officer requesting"
                         )
-    parser.add_argument("-r", "--reviewer",
+    subpi.add_argument("-r", "--reviewer",
                         help="name of the reviewer.  Defaults to sbillinge")
-    parser.add_argument("-s", "--status",
+    subpi.add_argument("-s", "--status",
                         help="status, from [invited, accepted, declined, downloaded,"
                              "inprogress, submitted], default is accepted")
-    parser.add_argument("-t", "--title",
+    subpi.add_argument("-t", "--title",
                         help="the title of the proposal")
-    args = parser.parse_args(argv)
-    return args
+    return subpi
 
 
 def main(args):
@@ -52,8 +43,7 @@ def main(args):
         name.first.casefold().strip("."))
 
 
-    pdoc = {'day': day, 'month': month, 'year': year,
-            'adequacy_of_resources':['The resources available to the PI seem adequate'],
+    pdoc = {'adequacy_of_resources':['The resources available to the PI seem adequate'],
             'agency': args.type,
             'competency_of_team': [],
             'doe_appropriateness_of_approach': [],
@@ -65,13 +55,13 @@ def main(args):
             'freewrite': [],
             'goals': [],
             'importance': [],
-            'institutions': '',
+            'institutions': [],
             'month': 'tbd',
             'names': name.full_name,
             'nsf_broader_impacts': [],
             'nsf_create_original_transformative': [],
             'nsf_plan_good': [],
-            'nsf_pot_to_Advance_knowledge': [],
+            'nsf_pot_to_advance_knowledge': [],
             'nsf_pot_to_benefit_society': [],
             'status': 'accepted',
             'summary': '',
