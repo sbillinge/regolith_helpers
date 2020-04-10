@@ -33,8 +33,8 @@ Usage
 
 Example:
 --------
-
 For example, ``rh a_proprev --help`` produces
+
  .. code-block:: python
 
     usage: rh a_proprev [-h] [-q REQUESTER] [-r REVIEWER] [-s STATUS] [-t TITLE]
@@ -58,6 +58,7 @@ For example, ``rh a_proprev --help`` produces
                         the title of the proposal
 
 so you may type something like
+
  .. code-block:: python
 
     usage: rh a_proprev "A. Einstein" nsf 1905-05-10 -t "towards a theory of relativity" -q "P. O. Officer" -s downloaded -r me
@@ -71,8 +72,7 @@ Contributing
 Please contribute helpers!
 #. fork and clone the repo
 #. create a new branch
-#. write your helper.  For example, use the ``add_proposal_review.py`` helper
-   as a template.
+#. write your helper.  For example, use the ``add_proposal_review.py`` helper as a template.
 #. you will have to
   #. create the new helper file based off, for example, ``add_proposal_review.py``.
      it should have a ``subparsers()`` and a ``main()`` function
