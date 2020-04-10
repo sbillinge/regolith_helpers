@@ -21,9 +21,9 @@ setuptools.setup(
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
     ],
-#    entry_points={'console_scripts': [
-#            'regolith-helpers = regolith-helpers.main:main',],
-#        },
+    entry_points={'console_scripts': [
+            'rh = regolith_helpers.main:main'],
+        },
     data_files = [("", ["LICENSE.txt"])],
     python_requires='>=3.7',
     zip_safe=False,
