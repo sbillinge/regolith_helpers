@@ -32,9 +32,9 @@ Usage
    to the directory where you are running it
 
 Example:
-========
+--------
 
-``rh a_proprev --help`` produces
+For example, ``rh a_proprev --help`` produces
  .. code-block:: python
 
     usage: rh a_proprev [-h] [-q REQUESTER] [-r REVIEWER] [-s STATUS] [-t TITLE]
@@ -62,4 +62,35 @@ so you may type something like
 
     usage: rh a_proprev "A. Einstein" nsf 1905-05-10 -t "towards a theory of relativity" -q "P. O. Officer" -s downloaded -r me
 
-to add to the proposalReviews collection a new entry for a proposal you have been sent to review by a Program Office with the name P. O. Officer with a due date of 10th May 1905
+to add to the proposalReviews collection a new entry for a proposal by Einstein
+you have been sent to review by a Program Office with the name P. O. Officer
+that has a due date of 10th May 1905
+
+Contributing
+============
+Please contribute helpers!
+#. fork and clone the repo
+#. create a new branch
+#. write your helper.  For example, use the ``add_proposal_review.py`` helper
+   as a template.
+#. you will have to
+  #. create the new helper file based off, for example, ``add_proposal_review.py``.
+     it should have a ``subparsers()`` and a ``main()`` function
+  #. update ``main.py`` to import it, add the subparser and run the helper
+  #. make a test.  If the helper writes or updates a file, put the expected output
+     in the ``tests/outputs`` directory and add the command line args and the
+     output filename that will generate that output in the
+     ``test_regolith_helpers.py`` file in the tests directory.  If it is a new
+     that will be used by multiple helpers add it to ``test_tools.py``
+  #. create a news item.  copy TEMPLATE.rst to ``<branchname>.rst`` then edit
+     this file with a list of all changes, additions, etc. that are in this
+     branch
+#. git add and git commit as needed
+#. ``git push origin <branch-nanme>``
+#. got to the github page of your fork or of th main repo and open a PR.
+   Indicate it is not finished by prepending your PR message with ``WIP``.
+#. make more commits and push them
+#. make sure the tests pass.  type ``pytest path/to/tests/``
+#. when you are ready to have it reviewed and merged, edit the title to remove
+   the ``WIP`` and type something like ``@sbillinge ready for review and merge``
+
