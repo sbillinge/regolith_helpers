@@ -6,21 +6,18 @@ import nameparser
 from regolith.fsclient import dump_yaml
 from regolith.dates import month_to_str_int
 
-OUTCOLLECTION = 'proposalReviews'
+OUTCOLLECTION = 'refereeReports'
 ALLOWED_STATI = ["invited", "accepted", "declined", "downloaded", "inprogress",
                  "submitted"]
 
 
 def subparser(subp):
-    subpi = subp.add_parser("a_proprev", help="adds a new empty proposal review")
-    subpi.add_argument("name", help="pi first name space last name in quotes",
+    subpi = subp.add_parser("a_manrev", help="adds a new empty manuscript review")
+    subpi.add_argument("last", help="first author last name",
                         default=None)
-    subpi.add_argument("type", help="nsf or doe", default=None)
+    subpi.add_argument("journal", help="the journal asking for the review", default=None)
     subpi.add_argument("due_date", help="due date in form YYYY-MM-DD",
                         default=None)
-    subpi.add_argument("-q", "--requester",
-                        help="Name of the Program officer requesting"
-                        )
     subpi.add_argument("-r", "--reviewer",
                         help="name of the reviewer.  Defaults to sbillinge")
     subpi.add_argument("-s", "--status",
@@ -33,49 +30,31 @@ def subparser(subp):
 
 def main(args):
     file = Path.cwd().joinpath('..', 'db', "{}.yml".format(OUTCOLLECTION))
-    name = nameparser.HumanName(args.name)
-    day = dt.datetime.today().day
+    sync_coll(file, {})
+
     month = dt.datetime.today().month
     year = dt.datetime.today().year
     now = dt.datetime.now()
-    key = "{}{}_{}_{}".format(
-        str(year)[-2:], month_to_str_int(month), name.last.casefold(),
-        name.first.casefold().strip("."))
+    key = "{}{}_{}".format(
+        str(year)[-2:], month_to_str_int(month), args.last.casefold())
 
 
-    pdoc = {'adequacy_of_resources':['The resources available to the PI seem adequate'],
-            'agency': args.type,
-            'competency_of_team': [],
-            'doe_appropriateness_of_approach': [],
-            'doe_reasonableness_of_budget': [],
-            'doe_relevance_to_program_mission': [],
-            'does_how': [],
-            'does_what': '',
+    pdoc = {'claimed_found_what': [],
+            'claimed_why_important': [],
+            'did_how': [],
+            'did_what': [],
             'due_date': args.due_date,
-            'freewrite': [],
-            'goals': [],
-            'importance': [],
-            'institutions': [],
+            'editor_eyes_only': '',
+            'first_author_last_name': args.last,
+            'final_assessment': [],
+            'freewrite': '',
+            'journal': args.journal,
             'month': 'tbd',
-            'names': name.full_name,
-            'nsf_broader_impacts': [],
-            'nsf_create_original_transformative': [],
-            'nsf_plan_good': [],
-            'nsf_pot_to_advance_knowledge': [],
-            'nsf_pot_to_benefit_society': [],
+            'recommendation': '',
             'status': 'accepted',
-            'summary': '',
+            'validity_assessment': [],
             'year': 2020
             }
-
-    if args.title:
-        pdoc.update({'title': args.title})
-    else:
-        pdoc.update({'title': ''})
-    if args.requester:
-        pdoc.update({'requester': args.requester})
-    else:
-        pdoc.update({'requester': ''})
     if args.reviewer:
         pdoc.update({'reviewer': args.reviewer})
     else:
@@ -85,14 +64,16 @@ def main(args):
             raise ValueError("status should be one of {}".format(ALLOWED_STATI))
         else:
             pdoc.update({'status': args.status})
+    if args.title:
+        pdoc.update({'title': args.title})
     else:
-        pdoc.update({'requester': ''})
-
+        pdoc.update({'title': ''})
     fullpdoc = {key: pdoc}
     sync_coll(file, fullpdoc)
 
-    print("{} proposal has been added/updated in proposal reviews".format(args.name))
+    print("{} proposal has been added/updated in proposal reviews".format(args.last))
     return fullpdoc
+
 
 def sync_coll(collfile, dict):
     with open(collfile, "r", encoding='utf8') as i:
@@ -105,3 +86,4 @@ def sync_coll(collfile, dict):
 
 if __name__ == '__main__':
     main()
+

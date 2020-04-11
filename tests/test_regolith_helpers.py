@@ -8,13 +8,17 @@ helper_map = [
     (["a_proprev",
       "A. Einstein", "nsf", "2020-04-08", "-q", "Tess Guebre",
       "-s", "downloaded", "-t", "A flat world theory"],
-      "proposalReviews")]
+      "proposalReviews"),
+    (["a_manrev", "Einstein", "Nature", "2020-04-11"],
+     "refereeReports")
+    ]
 
 @pytest.mark.parametrize("hm,outcollection", helper_map)
 def test_regolith_helpers(hm, outcollection, make_db):
     repo = make_db
     tmp = Path(repo) / "local" / "fl"
-    os.mkdir(tmp.parent)
+    if not tmp.parent.is_dir():
+        os.mkdir(tmp.parent)
     os.chdir(tmp.parent)
     main(argvs=hm)
     afile = Path(repo).joinpath("db", "{}.yml".format(outcollection))
