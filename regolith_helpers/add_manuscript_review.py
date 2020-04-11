@@ -20,9 +20,11 @@ def subparser(subp):
                         default=None)
     subpi.add_argument("-r", "--reviewer",
                         help="name of the reviewer.  Defaults to sbillinge")
+    subpi.add_argument("-q", "--requester",
+                        help="name of the editor requesting the review")
     subpi.add_argument("-s", "--status",
                         help="status, from [invited, accepted, declined, downloaded,"
-                             "inprogress, submitted], default is accepted")
+                             "inprogress, submitted, cancelled], default is accepted")
     subpi.add_argument("-t", "--title",
                         help="the title of the proposal")
     return subpi
@@ -59,6 +61,10 @@ def main(args):
         pdoc.update({'reviewer': args.reviewer})
     else:
         pdoc.update({'reviewer': 'sbillinge'})
+    if args.requester:
+        pdoc.update({'requester': args.requester})
+    else:
+        pdoc.update({'requester': ''})
     if args.status:
         if args.status not in ALLOWED_STATI:
             raise ValueError("status should be one of {}".format(ALLOWED_STATI))

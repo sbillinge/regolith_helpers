@@ -86,7 +86,7 @@ def main(args):
         else:
             pdoc.update({'status': args.status})
     else:
-        pdoc.update({'requester': ''})
+        pdoc.update({'status': ''})
 
     fullpdoc = {key: pdoc}
     sync_coll(file, fullpdoc)
