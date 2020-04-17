@@ -8,7 +8,7 @@ from regolith.dates import month_to_str_int
 
 OUTCOLLECTION = 'proposalReviews'
 ALLOWED_STATI = ["invited", "accepted", "declined", "downloaded", "inprogress",
-                 "submitted"]
+                 "submitted", "cancelled"]
 
 
 def subparser(subp):
@@ -25,7 +25,7 @@ def subparser(subp):
                         help="name of the reviewer.  Defaults to sbillinge")
     subpi.add_argument("-s", "--status",
                         help="status, from [invited, accepted, declined, downloaded,"
-                             "inprogress, submitted], default is accepted")
+                             " inprogress, submitted, cancelled], default is accepted")
     subpi.add_argument("-t", "--title",
                         help="the title of the proposal")
     return subpi
@@ -86,7 +86,7 @@ def main(args):
         else:
             pdoc.update({'status': args.status})
     else:
-        pdoc.update({'requester': ''})
+        pdoc.update({'status': 'accepted'})
 
     fullpdoc = {key: pdoc}
     sync_coll(file, fullpdoc)
